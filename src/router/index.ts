@@ -102,6 +102,26 @@ export const constantRoutes:RouteRecordRaw[] = [
         meta: { title: '个人中心', icon: 'user', noCache: true }
       }
     ]
+  },
+  {
+    path: '/myView',
+    component: Layout,
+    redirect: '/myView/index',
+    name: 'myView',
+    meta: {
+      title: 'myView',
+      icon: 'excel',
+      // hidden: true,
+      alwaysShow: true
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/myView/index.vue'),
+        name: 'myView',
+        meta: { title: '我的页面', icon: 'user', noCache: true }
+      }
+    ]
   }
 ];
 
