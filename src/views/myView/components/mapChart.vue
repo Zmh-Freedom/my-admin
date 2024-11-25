@@ -1,42 +1,76 @@
 <script setup lang="ts">
 import * as echarts from 'echarts';
-import { onMounted } from 'vue';
-import getChinaMap from '@/api/getChinaMap';
+import { onMounted, ref } from 'vue';
+import China from '@/assets/China.json';
+
+// 获取地图DOM元素
+const map = ref();
+
+// 注册中国地图
+echarts.registerMap('china', China as never);
 onMounted(() => {
-  const chartDom = document.getElementById('chartsDOM');
-  // 初始化统计图对象
-  const myChart = echarts.init(chartDom);
-  // 显示 loading 动画
-  myChart.showLoading();
-  // 再得到数据的基础上，进行地图绘制
-  getChinaMap.then(res => {
-    // 得到结果后，关闭动画
-    myChart.hideLoading();
-    // 注册地图(数据放在axios返回对象的data中哦)
-    echarts.registerMap('CN', res.data);
-    const option = {
-      series: [
-        {
-          name: '中国地图',
-          type: 'map',
-          map: 'CN', // 这个是上面注册时的名字哦，registerMap（'这个名字保持一致'）
-          label: {
-            show: true
-          }
+  const myMap = echarts.init(map.value);
+  // 设置配置项
+  myMap.setOption({
+    backgroundColor: 'transparent',
+    geo: {
+      map: 'china',
+      roam: false, // 鼠标缩放
+      // 地图位置
+      left: 0,
+      top: 0,
+      bottom: 0,
+      right: 0,
+      // 地图文字设置
+      label: {
+        show: true,
+        color: 'white',
+        fontSize: 8
+      },
+      itemStyle: {
+        color:
+        // 线性渐变，前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
+            {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              // 渐变效果
+              colorStops: [
+                {
+                  offset: 0,
+                  color: ' #022960 ' // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: '#023481' // 100% 处的颜色
+                }
+              ],
+              global: false // 缺省为 false
+            },
+        // 边框设置样式
+        borderColor: '#179FCB',
+        shadowColor: 'rgba(23,159,203, 0.5)',
+        shadowBlur: 17
+      },
+      //   地图高亮效果
+      emphasis: {
+        itemStyle: {
+          color: '#1369CD'
+        },
+        label: {
+          color: '#82B9F8'
         }
-      ],
-      backgroundColor: '#0C1439'
-    };
-    myChart.setOption(option);
+      }
+    }
   });
 });
 </script>
 
 <template>
   <div class="transparent-bg"
-       ref="chartsDOM"
-       id="myChart"
-       style="width:800px;height:600px">
+       ref="map">
   </div>
 </template>
 

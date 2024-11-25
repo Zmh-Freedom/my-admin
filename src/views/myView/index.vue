@@ -19,7 +19,7 @@ const radio1 = ref(1);
                 class="image"
                 src="@/assets/images/box.png"
                 style="position: absolute"
-            />
+             alt=""/>
             <div class="box_1">
               <h2>
                 行业市场规模
@@ -32,8 +32,8 @@ const radio1 = ref(1);
                 class="image"
                 src="@/assets/images/box.png"
                 style="position: absolute"
-            />
-            <div class="box_2">
+             alt=""/>
+            <div class="box_1">
               <el-radio-group v-model="radio1" size="large" syle="width: 100px;height: 100px">
                 <el-radio-button label="第一梯队" value=1 />
                 <el-radio-button label="第二梯队" value=2 />
@@ -47,9 +47,14 @@ const radio1 = ref(1);
           <img
               class="image_2"
               src= "@/assets/images/box2.png"
-          />
-          <div class="box_3">
-            <map-chart style="width: 450px;height: 350px;"></map-chart>
+           alt=""/>
+          <div class="box_3 flex-row">
+            <div class="box_2 flex-col">
+
+            </div>
+            <div style="margin: 15px">
+              <map-chart style="width: 350px;height: 350px;background:  0,0,0,0"></map-chart>
+            </div>
           </div>
         </div>
         <div class="flex-col items-center group_2">
@@ -57,7 +62,7 @@ const radio1 = ref(1);
             <img
                 class="image"
                 src= "@/assets/images/box3.png"
-            />
+             alt=""/>
             <div class="box_1">
             </div>
           </div>
@@ -65,8 +70,8 @@ const radio1 = ref(1);
             <img
                 class="image"
                 src="@/assets/images/box.png"
-            />
-            <div class="box_2">
+             alt=""/>
+            <div class="box_1">
             </div>
           </div>
         </div>
@@ -75,7 +80,7 @@ const radio1 = ref(1);
         <div class="box">
           <img
               class="image_3"
-              src="@/assets/images/box.png"/>
+              src="@/assets/images/box.png" alt=""/>
           <div class="box4">
           </div>
         </div>
@@ -83,15 +88,15 @@ const radio1 = ref(1);
           <img
               class="image"
               src="@/assets/images/box.png"
-          />
+           alt=""/>
           <div class="box_1"></div>
         </div>
         <div class="box ml-27">
           <img
               class="image"
               src="@/assets/images/box.png"
-          />
-          <div class="box_2">
+           alt=""/>
+          <div class="box_1">
           </div>
         </div>
       </div>
@@ -130,7 +135,7 @@ const radio1 = ref(1);
 .text {
   color: #ffffff;
   font-size: 36px;
-  line-height: 33.5px;
+  line-height: 33px;
 }
 .group {
   margin-top: 32px;
@@ -169,8 +174,8 @@ h2 {
 }
 .box_2{
   text-align: center;
-  width: 470px;
-  height: 290px;
+  width: 350px;
+  height: 350px;
   padding: 10px;
 }
 .box_3{
