@@ -3,7 +3,7 @@ import * as echarts from 'echarts';
 import { onMounted } from 'vue';
 onMounted(() => {
   type EChartsOption = echarts.EChartsOption;
-  var chartDom = document.getElementById('myChart2');
+  var chartDom = document.getElementById('barChart3');
   var myChart = echarts.init(chartDom, 'dark');
   var option: EChartsOption;
   option = {
@@ -16,7 +16,7 @@ onMounted(() => {
         }
       }
     },
-    backgroundColor: '#0C1439',
+    backgroundColor: 'transparent',
 
     toolbox: {
       feature: {
@@ -27,7 +27,7 @@ onMounted(() => {
       }
     },
     legend: {
-      data: ['轮胎产值', '增长率'],
+      data: ['市场预期', '产值'],
       orient: 'vertical',
       bottom: 'bottom'
     },
@@ -41,23 +41,26 @@ onMounted(() => {
     xAxis: [
       {
         type: 'category',
-        data: ['2020', '2021', '2022', '2023'],
+        data: ['2020', '2021', '2022', '2023', '2024'],
+        axisTick: {
+          show: false // 不显示坐标轴刻度线
+        },
+        axisLine: {
+          show: false // 不显示坐标轴线
+        },
         axisPointer: {
           type: 'shadow'
         }
       }
 
     ],
-    splitLine: {
-      show: false // 不显示网格线
-    },
     yAxis: [
       {
         type: 'value',
-        name: '轮胎产值',
+        name: '市场预期',
         min: 0,
-        max: 2000,
-        interval: 250,
+        max: 50,
+        interval: 10,
         splitLine: {
           show: false // 不显示网格线
         },
@@ -67,10 +70,10 @@ onMounted(() => {
       },
       {
         type: 'value',
-        name: '增长率',
+        name: '产值',
         min: 0,
-        max: 200,
-        interval: 20,
+        max: 50,
+        interval: 10,
         splitLine: {
           show: false // 不显示网格线
         },
@@ -81,7 +84,7 @@ onMounted(() => {
     ],
     series: [
       {
-        name: '轮胎产值',
+        name: '市场预期',
         type: 'bar',
         barWidth: '40%',
         barGap: '20%',
@@ -91,18 +94,20 @@ onMounted(() => {
             return value as number + ' ';
           }
         },
-        data: [1459, 1752, 1744.5, 1805]
+        data: [10, 20, 30, 40, 50]
       },
       {
-        name: '增长率',
-        type: 'line',
-        yAxisIndex: 1,
+        name: '产值',
+        type: 'bar',
+        barWidth: '40%',
+        barGap: '20%',
+        barCategoryGap: '10%',
         tooltip: {
           valueFormatter: function (value) {
             return value as number + ' ';
           }
         },
-        data: [80, 85, 80, 160]
+        data: [20, 25, 50, 45, 30]
       }
     ]
   };
@@ -112,8 +117,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div ref="myChart2"
-       id="myChart2">
+  <div ref="barChart3"
+       id="barChart3">
 
   </div>
 </template>

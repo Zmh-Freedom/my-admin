@@ -8,39 +8,95 @@ onMounted(() => {
   var option: EChartsOption;
 
   option = {
-    title: {
-      text: ''
-    },
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        type: 'shadow'
+        // Use axis to trigger tooltip
+        type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
       }
     },
+    legend: {},
     backgroundColor: '#0C1439',
-    legend: {
-      bottom: 'bottom'
-    },
     grid: {
-      top: '4%',
+      top: '10%',
       left: '3%',
       right: '4%',
-      bottom: '10%',
+      bottom: '3%',
       containLabel: true
     },
     xAxis: {
       type: 'value',
-      boundaryGap: [0, 0.01]
+      splitLine: {
+        show: false // 不显示网格线
+      }
     },
     yAxis: {
       type: 'category',
-      data: ['米其林', '普利司通', '固特异']
+      splitLine: {
+        show: false // 不显示网格线
+      },
+      data: ['比亚迪', '长城', '长安', '宝马', '奔驰', '奥迪']
     },
     series: [
       {
-        name: '产值（亿元）',
+        name: '米其林',
         type: 'bar',
-        data: [1068.56, 1060.57, 652.7]
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [10, 20, 30, 40, 50, 60]
+      },
+      {
+        name: '普利司通',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [20, 32, 10, 34, 90, 30, 10]
+      },
+      {
+        name: '固特异',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [20, 82, 91, 34, 90, 30, 10]
+      },
+      {
+        name: '马牌',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [50, 12, 60, 54, 90, 30, 10]
+      },
+      {
+        name: '韩泰',
+        type: 'bar',
+        stack: 'total',
+        label: {
+          show: true
+        },
+        emphasis: {
+          focus: 'series'
+        },
+        data: [20, 32, 12, 34, 90, 30, 20]
       }
     ]
   };
