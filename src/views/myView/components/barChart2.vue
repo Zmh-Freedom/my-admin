@@ -17,6 +17,7 @@ onMounted(() => {
         type: 'shadow'
       }
     },
+    backgroundColor: '#0C1439',
     legend: {
       bottom: 'bottom'
     },

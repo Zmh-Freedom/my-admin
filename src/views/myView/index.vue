@@ -3,79 +3,121 @@ import Chart2 from '@/views/myView/components/chart2.vue';
 import { ref } from 'vue';
 import BarChart2 from '@/views/myView/components/barChart2.vue';
 import '@/assets/index.css';
+import MapChart from '@/views/myView/components/mapChart.vue';
 const radio1 = ref(1);
+
 </script>
 
 <template>
-  <div class="flex-col page">
-    <span class="self-center text">子系统-车轮即轮胎</span>
-    <div class="flex-row self-stretch group">
-      <div class="flex-col items-center relative">
-        <img
-            class="image"
-            src="@/assets/images/box.png"
-        />
-        <div class="box_1 box">
-          <h2>
-            行业市场规模
-          </h2>
-          <Chart2 class="chart_1 chart"></Chart2>
+  <div class="flex-col page container">
+    <div class="self-start flex-col">
+      <span class="self-center text" >子系统-车轮即轮胎</span>
+      <div class="flex-row self-stretch group">
+        <div class="flex-col">
+          <div class="box">
+            <img
+                class="image"
+                src="@/assets/images/box.png"
+                style="position: absolute"
+            />
+            <div class="box_1">
+              <h2>
+                行业市场规模
+              </h2>
+              <Chart2 class="chart chart_1"></Chart2>
+            </div>
+          </div>
+          <div class="box mt-23">
+            <img
+                class="image"
+                src="@/assets/images/box.png"
+                style="position: absolute"
+            />
+            <div class="box_2">
+              <el-radio-group v-model="radio1" size="large" syle="width: 100px;height: 100px">
+                <el-radio-button label="第一梯队" value=1 />
+                <el-radio-button label="第二梯队" value=2 />
+                <el-radio-button label="第三梯队" value=3 />
+              </el-radio-group>
+              <bar-chart2 class="chart index_3" style="width: 450px;height: 220px;"></bar-chart2>
+            </div>
+          </div>
+        </div>
+        <div class="box ml-27">
+          <img
+              class="image_2"
+              src= "@/assets/images/box2.png"
+          />
+          <div class="box_3">
+            <map-chart style="width: 450px;height: 350px;"></map-chart>
+          </div>
+        </div>
+        <div class="flex-col items-center group_2">
+          <div class="box">
+            <img
+                class="image"
+                src= "@/assets/images/box3.png"
+            />
+            <div class="box_1">
+            </div>
+          </div>
+          <div class="box mt-23">
+            <img
+                class="image"
+                src="@/assets/images/box.png"
+            />
+            <div class="box_2">
+            </div>
+          </div>
         </div>
       </div>
-      <div class="flex-col items-center relative mt-300">
-        <img
-            class="image mt-23"
-            src="@/assets/images/box.png"
-        />
-        <div class="box_2 box">
-          <el-radio-group v-model="radio1" size="large" syle="width: 100px;height: 100px">
-            <el-radio-button label="第一梯队" value=1 />
-            <el-radio-button label="第二梯队" value=2 />
-            <el-radio-button label="第三梯队" value=3 />
-          </el-radio-group>
-          <bar-chart2 class="chart" style="width: 450px;height: 220px;"></bar-chart2>
+      <div class="flex-row self-stretch group_3" >
+        <div class="box">
+          <img
+              class="image_3"
+              src="@/assets/images/box.png"/>
+          <div class="box4">
+          </div>
+        </div>
+        <div class="box ml-43">
+          <img
+              class="image"
+              src="@/assets/images/box.png"
+          />
+          <div class="box_1"></div>
+        </div>
+        <div class="box ml-27">
+          <img
+              class="image"
+              src="@/assets/images/box.png"
+          />
+          <div class="box_2">
+          </div>
         </div>
       </div>
-      <img
-          class="image_2"
-          src= "@/assets/images/box2.png"
-      />
-      <div class="flex-col items-center group_2">
-        <img
-            class="image"
-            src= "@/assets/images/box3.png"
-        />
-        <img
-            class="image mt-23"
-            src="@/assets/images/box.png"
-        />
-      </div>
-    </div>
-    <div class="flex-row justify-center self-stretch group_3">
-      <img
-          class="image_3"
-          src="@/assets/images/box.png"/>
-      <img
-          class="image ml-43"
-          src="@/assets/images/box.png"
-      />
-      <img
-          class="image ml-43"
-          src="@/assets/images/box.png"
-      />
     </div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* 确保内容至少占满视窗高度 */
+}
 .mt-23 {
   margin-top: 23px;
 }
-.mt-300{
-  margin-top: 300px;
+.ml-27{
+  margin-left: 27px;
 }
 .ml-43 {
   margin-left: 43px;
+}
+.index_3{
+  z-index: 3;
 }
 .page {
   padding: 36px 31px 51px;
@@ -98,10 +140,12 @@ h2 {
   color: #ffffff;
 }
 .image {
+  position: absolute;
   width: 474px;
   height: 294px;
-  position: relative;
-  z-index: 1;
+  user-select: none;        /* 禁止选中 */
+  pointer-events: none;     /* 禁用鼠标事件 */
+  -webkit-user-drag: none;  /* 禁止拖动（Safari） */
 }
 .chart{
   background-color: #0C1439;
@@ -110,33 +154,44 @@ h2 {
 .chart_1{
   width: 450px;
   height: 240px;
-  z-index: 10;
 }
 
 .box{
+  background-color: #0C1439;
+  position: relative;
+  row-gap: 1.5em;
+}
+.box_1{
   text-align: center;
   width: 470px;
   height: 290px;
-  background-color: #0C1439;
-  z-index: 1;
-}
-.box_1{
-  position: absolute;
-  margin-top: 2px;
+  padding: 10px;
 }
 .box_2{
-  margin-top: 10px;
-  position: absolute;
+  text-align: center;
+  width: 470px;
+  height: 290px;
+  padding: 10px;
 }
-.image_2 {
-  margin-left: 25px;
+.box_3{
   width: 757px;
   height: 611px;
-  position: relative;
+}
+.box4{
+  width: 742px;
+  height: 294px;
+}
+.image_2 {
+  width: 757px;
+  height: 611px;
+  position: absolute;
   z-index: 2;
+  user-select: none;        /* 禁止选中 */
+  pointer-events: none;     /* 禁用鼠标事件 */
+  -webkit-user-drag: none;  /* 禁止拖动（Safari） */
 }
 .group_2 {
-  margin-left: 46px;
+  margin-left: 27px;
 }
 .group_3 {
   margin-top: 23px;
@@ -144,7 +199,7 @@ h2 {
 .image_3 {
   width: 742px;
   height: 294px;
-  position: relative;
+  position: absolute;
   z-index: 10
 }
 </style>

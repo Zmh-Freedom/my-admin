@@ -16,7 +16,7 @@ onMounted(() => {
         }
       }
     },
-    backgroundColor: '#000',
+    backgroundColor: '#0C1439',
 
     toolbox: {
       feature: {
