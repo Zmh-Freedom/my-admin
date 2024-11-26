@@ -16,7 +16,7 @@ onMounted(() => {
       }
     },
     legend: {},
-    backgroundColor: '#0C1439',
+    backgroundColor: 'transparent',
     grid: {
       top: '10%',
       left: '3%',

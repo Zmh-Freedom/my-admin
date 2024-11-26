@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Chart2 from '@/views/myView/components/chart2.vue';
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import '@/assets/index.css';
 import MapChart from '@/views/myView/components/mapChart.vue';
 import PieChart1 from '@/views/myView/components/pieChart1.vue';
@@ -11,7 +11,6 @@ import BarChart1 from '@/views/myView/components/barChart1.vue';
 import BarChart2 from '@/views/myView/components/barChart2.vue';
 import BarChart3 from '@/views/myView/components/barChart3.vue';
 const radio1 = ref(1);
-
 const tableData = [
   {
     date: '2024年6月9日',
@@ -35,11 +34,31 @@ const tableData = [
   }
 ];
 
+const container = ref<HTMLDivElement | null>(null); // 指定类型
+
+const scalePage = () => {
+  const scale = 0.65;
+
+  if (container.value) {
+    container.value.style.transform = `scale(${scale})`;
+    container.value.style.transformOrigin = 'top left';
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('resize', scalePage);
+  scalePage();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', scalePage);
+});
+
 </script>
 
 <template>
   <div class="flex-col page container">
-    <div class="self-start flex-col">
+    <div class="self-start flex-col" ref="container">
       <span class="self-center text" >子系统-车轮即轮胎</span>
       <div class="flex-row self-stretch group">
         <div class="flex-col">
@@ -198,11 +217,15 @@ const tableData = [
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; /* 确保内容至少占满视窗高度 */
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* 隐藏滚动条 */
+  position: relative;
+  cursor: grab; /* 鼠标样式 */
+}
+.container:active {
+  cursor: grabbing;
 }
 .mt-23 {
   margin-top: 23px;
@@ -220,9 +243,9 @@ const tableData = [
   padding: 36px 31px 51px;
   background-color: #000000;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
   overflow-x: auto;
-  height: 100%;
 }
 .text {
   color: #ffffff;
