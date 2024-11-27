@@ -11,7 +11,6 @@ onMounted(() => {
     tooltip: {
       trigger: 'axis',
       axisPointer: {
-        // Use axis to trigger tooltip
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
       }
     },

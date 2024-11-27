@@ -17,15 +17,6 @@ onMounted(() => {
       }
     },
     backgroundColor: 'transparent',
-
-    toolbox: {
-      feature: {
-        // dataView: { show: true, readOnly: false },
-        // magicType: { show: true, type: ['line', 'bar'] },
-        // restore: { show: true },
-        // saveAsImage: { show: true }
-      }
-    },
     legend: {
       data: ['市场预期', '产值'],
       orient: 'vertical',
@@ -56,7 +47,6 @@ onMounted(() => {
           fontSize: '10px'
         }
       }
-
     ],
     yAxis: [
       {
