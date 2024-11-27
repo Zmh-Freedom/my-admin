@@ -50,6 +50,10 @@ onMounted(() => {
         },
         axisPointer: {
           type: 'shadow'
+        },
+        axisLabel: {
+          formatter: '{value}',
+          fontSize: '10px'
         }
       }
 

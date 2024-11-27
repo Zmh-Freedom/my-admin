@@ -15,25 +15,39 @@ onMounted(() => {
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
       }
     },
-    legend: {},
+    legend: {
+      itemWidth: 10,
+      itemHeight: 8
+    },
     backgroundColor: 'transparent',
     grid: {
-      top: '10%',
+      top: '15%',
       left: '3%',
       right: '4%',
-      bottom: '3%',
+      bottom: '1%',
       containLabel: true
     },
     xAxis: {
       type: 'value',
       splitLine: {
         show: false // 不显示网格线
+      },
+      axisLabel: {
+        formatter: '{value}',
+        fontSize: '10px'
       }
     },
     yAxis: {
       type: 'category',
       splitLine: {
         show: false // 不显示网格线
+      },
+      nameTextStyle: {
+        fontSize: 1
+      },
+      axisLabel: {
+        formatter: '{value}',
+        fontSize: '10px'
       },
       data: ['比亚迪', '长城', '长安', '宝马', '奔驰', '奥迪']
     },
@@ -43,7 +57,7 @@ onMounted(() => {
         type: 'bar',
         stack: 'total',
         label: {
-          show: true
+          show: false
         },
         emphasis: {
           focus: 'series'
@@ -55,7 +69,7 @@ onMounted(() => {
         type: 'bar',
         stack: 'total',
         label: {
-          show: true
+          show: false
         },
         emphasis: {
           focus: 'series'
@@ -67,7 +81,7 @@ onMounted(() => {
         type: 'bar',
         stack: 'total',
         label: {
-          show: true
+          show: false
         },
         emphasis: {
           focus: 'series'
@@ -79,7 +93,7 @@ onMounted(() => {
         type: 'bar',
         stack: 'total',
         label: {
-          show: true
+          show: false
         },
         emphasis: {
           focus: 'series'
@@ -91,7 +105,7 @@ onMounted(() => {
         type: 'bar',
         stack: 'total',
         label: {
-          show: true
+          show: false
         },
         emphasis: {
           focus: 'series'
