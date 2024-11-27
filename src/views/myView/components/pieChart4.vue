@@ -12,7 +12,10 @@ onMounted(() => {
     },
     legend: {
       top: 'center',
-      right: 'right'
+      orient: 'vertical',
+      right: '10%',
+      itemWidth: 10,
+      itemHeight: 10
     },
     backgroundColor: 'transparent',
     series: [
@@ -20,7 +23,7 @@ onMounted(() => {
         name: 'Access From',
         type: 'pie',
         radius: ['60%', '90%'],
-        left: '-25%',
+        left: '-50%',
         avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 3,

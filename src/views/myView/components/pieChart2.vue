@@ -12,20 +12,22 @@ onMounted(() => {
     },
     legend: {
       top: 'center',
-      right: 'right'
+      right: 'right',
+      itemWidth: 15,
+      itemHeight: 10
     },
     backgroundColor: 'transparent',
     series: [
       {
         name: 'Access From',
         type: 'pie',
-        right: '30%',
-        radius: ['50%', '70%'],
+        left: '-45%',
+        radius: ['50%', '80%'],
         avoidLabelOverlap: false,
         itemStyle: {
-          borderRadius: 3,
+          borderRadius: 2,
           borderColor: '#fff',
-          borderWidth: 2
+          borderWidth: 1
         },
         label: {
           show: false,
@@ -34,7 +36,7 @@ onMounted(() => {
         emphasis: {
           label: {
             show: true,
-            fontSize: 20,
+            fontSize: 10,
             fontWeight: 'bold'
           }
         },

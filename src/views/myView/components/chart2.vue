@@ -16,26 +16,19 @@ onMounted(() => {
         }
       }
     },
-    backgroundColor: '#0C1439',
-
-    toolbox: {
-      feature: {
-        // dataView: { show: true, readOnly: false },
-        // magicType: { show: true, type: ['line', 'bar'] },
-        // restore: { show: true },
-        // saveAsImage: { show: true }
-      }
-    },
+    backgroundColor: 'transparent',
     legend: {
       data: ['轮胎产值', '增长率'],
       orient: 'vertical',
-      bottom: 'bottom'
+      bottom: 'bottom',
+      itemWidth: 15,
+      itemHeight: 10
     },
     grid: {
       top: '4%',
       left: '3%',
       right: '4%',
-      bottom: '10%',
+      bottom: '14%',
       containLabel: true
     },
     xAxis: [
@@ -44,6 +37,10 @@ onMounted(() => {
         data: ['2020', '2021', '2022', '2023'],
         axisPointer: {
           type: 'shadow'
+        },
+        axisLabel: {
+          formatter: '{value}',
+          fontSize: '10px'
         }
       }
 
@@ -62,7 +59,8 @@ onMounted(() => {
           show: false // 不显示网格线
         },
         axisLabel: {
-          formatter: '{value}'
+          formatter: '{value}',
+          fontSize: '10px'
         }
       },
       {
@@ -75,7 +73,8 @@ onMounted(() => {
           show: false // 不显示网格线
         },
         axisLabel: {
-          formatter: '{value}%'
+          formatter: '{value}',
+          fontSize: '10px'
         }
       }
     ],

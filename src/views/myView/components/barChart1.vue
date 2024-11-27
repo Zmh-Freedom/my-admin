@@ -17,15 +17,17 @@ onMounted(() => {
         type: 'shadow'
       }
     },
-    backgroundColor: '#0C1439',
     legend: {
-      bottom: 'bottom'
+      bottom: 'bottom',
+      itemWidth: 10,
+      itemHeight: 8
     },
+    backgroundColor: 'transparent',
     grid: {
       top: '4%',
       left: '3%',
       right: '4%',
-      bottom: '10%',
+      bottom: '15%',
       containLabel: true
     },
     xAxis: {
@@ -33,14 +35,22 @@ onMounted(() => {
       splitLine: {
         show: false // 不显示网格线
       },
-      boundaryGap: [0, 0.01]
+      boundaryGap: [0, 0.01],
+      axisLabel: {
+        formatter: '{value}',
+        fontSize: '10px'
+      }
     },
     yAxis: {
       type: 'category',
       splitLine: {
         show: false // 不显示网格线
       },
-      data: ['米其林', '普利司通', '固特异']
+      data: ['米其林', '普利司通', '固特异'],
+      axisLabel: {
+        formatter: '{value}',
+        fontSize: '10px'
+      }
     },
     series: [
       {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Chart2 from '@/views/myView/components/chart2.vue';
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import '@/assets/index.css';
 import MapChart from '@/views/myView/components/mapChart.vue';
 import PieChart1 from '@/views/myView/components/pieChart1.vue';
@@ -11,7 +11,6 @@ import BarChart1 from '@/views/myView/components/barChart1.vue';
 import BarChart2 from '@/views/myView/components/barChart2.vue';
 import BarChart3 from '@/views/myView/components/barChart3.vue';
 const radio1 = ref(1);
-
 const tableData = [
   {
     date: '2024年6月9日',
@@ -34,6 +33,26 @@ const tableData = [
     news: 'No. 189, Grove St, Los Angeles'
   }
 ];
+
+const container = ref<HTMLDivElement | null>(null); // 指定类型
+
+const scalePage = () => {
+  const scale = 0.65;
+
+  if (container.value) {
+    container.value.style.transform = `scale(${scale})`;
+    container.value.style.transformOrigin = 'top left';
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('resize', scalePage);
+  scalePage();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', scalePage);
+});
 
 </script>
 
@@ -63,13 +82,13 @@ const tableData = [
                 style="position: absolute"
              alt=""/>
             <div class="box_1">
-              <div style="margin-top: 10px">
-                <el-radio-group v-model="radio1" size="large" syle="width: 100px;height: 100px;">
+              <div style="margin-top: 1vh">
+                <el-radio-group v-model="radio1" size="small" syle="width: 5vh;height: 9.2vh;">
                   <el-radio-button label="第一梯队" value=1 />
                   <el-radio-button label="第二梯队" value=2 />
                   <el-radio-button label="第三梯队" value=3 />
                 </el-radio-group>
-                <bar-chart1 class="chart index_3" style="width: 450px;height: 220px;"></bar-chart1>
+                <bar-chart1 class="chart_1"></bar-chart1>
               </div>
             </div>
           </div>
@@ -81,47 +100,53 @@ const tableData = [
            alt=""/>
           <div class="box_3 flex-col">
             <div class=" flex-row">
-              <div class="box_2 flex-col">
+              <div class="flex-col" style="text-align: center;">
                 <h2>轮胎链路全景图</h2>
                 <div class="flex-row self-stretch group">
-                  <h3 style="margin-right: 10px">上游</h3>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px;">合成橡胶<br>30%</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">天然橡胶<br>20%</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">钢丝帘线<br>15%</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">炭黑<br>25%</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">橡胶助剂<br>10%</el-tag>
+                  <h3 style="margin-right: 2vh">上游</h3>
+                  <div class="flex-col">
+                    <div class="flex-row">
+                      <el-tag type="primary"   style="margin-right: 1vh;">合成橡胶<br>30%</el-tag>
+                      <el-tag type="primary"   style="margin-right: 1vh">天然橡胶<br>20%</el-tag>
+                      <el-tag type="primary"   style="margin-right: 1vh">钢丝帘线<br>15%</el-tag>
+                      <el-tag type="primary"   style="margin-right: 1vh">炭黑<br>25%</el-tag>
+                    </div>
+                    <div class="flex-row" style="margin-top: 1vh">
+                      <el-tag type="primary"   style="margin-right: 1vh">橡胶助剂<br>10%</el-tag>
+                    </div>
+                  </div>
                 </div>
-                <div class="flex-row self-stretch group" style="">
+                <div class="flex-row self-stretch group" style="margin-top: 10vh">
                   <h3 style="margin-right: 10px">下游</h3>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px;">载重汽车</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">乘用车</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">工程机械车</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">工业车辆</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">特种车辆</el-tag>
-                  <el-tag type="primary" class='el-tag' style="margin-right: 10px">飞机</el-tag>
+                  <el-tag type="primary" class='el-tag' style="margin-right: 0.5vw;">载重汽车</el-tag>
+                  <el-tag type="primary" class='el-tag' style="margin-right: 0.5vw">乘用车</el-tag>
+                  <el-tag type="primary" class='el-tag' style="margin-right: 0.5vw">工程机<br>械车</el-tag>
+                  <el-tag type="primary" class='el-tag' style="margin-right: 0.5vw">工业车辆</el-tag>
+                  <el-tag type="primary" class='el-tag' style="margin-right: 0.5vw">特种车辆</el-tag>
+                  <el-tag type="primary" class='el-tag' style="margin-right: 0.5vw">飞机</el-tag>
                 </div>
               </div>
-              <div style="margin-top: 30px;margin-left: 100px">
-                <map-chart style="width: 300px;height: 300px;background: 0,0,0,0"></map-chart>
+              <div style="margin-top: 5vh;margin-left: -7vw">
+                <map-chart class="chart_map"></map-chart>
               </div>
             </div>
             <div class="flex-row" >
-              <pie-chart1 style="width: 245px;height: 300px;"></pie-chart1>
-              <pie-chart2 style="width: 245px;height: 300px;"></pie-chart2>
-              <pie-chart3 style="width: 245px;height: 300px;"></pie-chart3>
+              <pie-chart1 class="chart_pie"></pie-chart1>
+              <pie-chart2 class="chart_pie"></pie-chart2>
+              <pie-chart3 class="chart_pie"></pie-chart3>
             </div>
           </div>
         </div>
-        <div class="flex-col items-center group_2">
+        <div class="flex-col items-center ml-27">
           <div class="box">
             <img
                 class="image"
                 src= "@/assets/images/box3.png"
              alt=""/>
             <div class="box_1 flex-col" style="text-align: left;">
-              <h3>行业份额</h3>
+              <h2>行业份额</h2>
               <div style="">
-                <pie-chart4 style="height: 250px;"></pie-chart4>
+                <pie-chart4 class="chart_pie2"></pie-chart4>
               </div>
             </div>
           </div>
@@ -133,7 +158,7 @@ const tableData = [
             <div class="box_1" style="text-align: left;">
               <h3>竞品对标</h3>
               <div style="">
-                <bar-chart2 style="height: 250px;"></bar-chart2>
+                <bar-chart2 class="chart_1" style="font-size: 0.5%"></bar-chart2>
               </div>
             </div>
           </div>
@@ -145,13 +170,13 @@ const tableData = [
               class="image_3"
               src="@/assets/images/box.png" alt=""/>
           <div class="box4 flex-col" style="text-align: left;">
-            <h3>市场供给</h3>
+            <h2>市场供给</h2>
             <div>
-              <bar-chart3 style="height: 250px;"></bar-chart3>
+              <bar-chart3 class="chart_2"></bar-chart3>
             </div>
           </div>
         </div>
-        <div class="box ml-43">
+        <div class="box ml-27">
           <img
               class="image"
               src="@/assets/images/box.png"
@@ -160,8 +185,8 @@ const tableData = [
             <div >
               <h2>产业分析</h2>
             </div>
-            <div style="text-align: left;">
-              <p style="color: white;">
+            <div style="text-align: left;padding-left: 0.5vw;padding-right: 0.5vw">
+              <p style="color: white;font-size: 8px">
               <span style="color: red;">产业链分析:</span>
                 下游汽车行业销量回暖，带动轮胎需求;上游原材料价格震荡上涨，海运费处于高位，胎企成本端承压;半钢胎开工率处于高位，全钢胎开工率有所下降。<br>
                 <span style="color: red;">行业驱动分析:</span>
@@ -183,9 +208,10 @@ const tableData = [
               <el-table :data="tableData"
                         :header-cell-style="{ background: '#0C1439', color: '#ffffff' }"
                         :row-style="{ background: '#0C1439' }"
-                        style="width: 100%;height:100%;color: #ffffff" >
-                <el-table-column prop="date" label="日期" width="120" />
-                <el-table-column prop="source" label="来源" width="90" />
+                        size="small"
+                        style="width: 25vw;height:25vh;color: #ffffff;font-size: 1.5vh;" >
+                <el-table-column prop="date" label="日期" width="80" />
+                <el-table-column prop="source" label="来源" width="50" />
                 <el-table-column prop="news" label="内容" />
               </el-table>
             </div>
@@ -198,31 +224,35 @@ const tableData = [
 
 <style scoped>
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh; /* 确保内容至少占满视窗高度 */
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* 隐藏滚动条 */
+  position: relative;
+  cursor: grab; /* 鼠标样式 */
+}
+.container:active {
+  cursor: grabbing;
 }
 .mt-23 {
-  margin-top: 23px;
+  margin-top: 1vh;
 }
 .ml-27{
-  margin-left: 27px;
+  margin-left: 0.5vw;
 }
 .ml-43 {
-  margin-left: 43px;
+  margin-left: 0.5vw;
 }
 .index_3{
   z-index: 3;
 }
 .page {
-  padding: 36px 31px 51px;
+  padding: 3px 3px 5px;
   background-color: #000000;
   width: 100%;
+  height: 100%;
   overflow-y: auto;
   overflow-x: auto;
-  height: 100%;
 }
 .text {
   color: #ffffff;
@@ -230,69 +260,86 @@ const tableData = [
   line-height: 33px;
 }
 .group {
-  margin-top: 40px;
+  margin-top: 3.7vh;
 }
 p{
-  font-size: 12px;
+  font-size: 2vh;
   color: #ffffff;
 }
 h2 {
-  margin: 10px 0 0 30px;
+  font-size: 3vh;
+  margin: 1vh 0 0 3vh;
   color: #ffffff;
 }
 h3 {
-  margin: 10px 0 0 30px;
+  font-size: 2vh;
+  margin: 1vh 0 0 3vh;
   color: #ffffff;
 }
 .image {
   position: absolute;
-  width: 474px;
-  height: 294px;
+  width: 24.4vw;
+  height: 31vh;
   user-select: none;        /* 禁止选中 */
   pointer-events: none;     /* 禁用鼠标事件 */
   -webkit-user-drag: none;  /* 禁止拖动（Safari） */
 }
 .el-tag{
-  height: 50px;
-  width: 60px;
+  font-size: 2vh;
+  height: 4.6vh;
+  width: 4vw;
 }
 .chart{
-  background-color: #0C1439;
   z-index: 10;
 }
 .chart_1{
-  width: 450px;
-  height: 240px;
+  width: 23.43vw;
+  height: 25vh;
 }
-
+.chart_2{
+  width: 40.43vw;
+  height: 26vh;
+}
+.chart_map{
+  width: 18.625vw;
+  height: 38vh;
+  background: 0,0,0,0;
+}
+.chart_pie{
+  width: 14.5vw;
+  height: 20vh;
+}
+.chart_pie2{
+  width: 25vw;
+  height: 25vh;
+}
 .box{
   background-color: #0C1439;
   position: relative;
-  row-gap: 1.5em;
 }
 .box_1{
   text-align: center;
-  width: 470px;
-  height: 290px;
-  padding: 10px;
+  width: 24.4vw;
+  height: 30.85vh;
+  padding: 1px;
 }
 .box_2{
   text-align: center;
-  width: 350px;
-  height: 350px;
-  padding: 10px;
+  width: 18.22vw;
+  height: 32.4vh;
+  padding: 1px;
 }
 .box_3{
-  width: 757px;
-  height: 611px;
+  width: 43.4vw;
+  height: 56.57vh;
 }
 .box4{
-  width: 742px;
-  height: 294px;
+  width: 43.6vw;
+  height: 31vh;
 }
 .image_2 {
-  width: 757px;
-  height: 611px;
+  width: 43.4vw;
+  height: 63vh;
   position: absolute;
   z-index: 2;
   user-select: none;        /* 禁止选中 */
@@ -303,11 +350,11 @@ h3 {
   margin-left: 27px;
 }
 .group_3 {
-  margin-top: 23px;
+  margin-top: 1vh;
 }
 .image_3 {
-  width: 742px;
-  height: 294px;
+  width: 43.64vw;
+  height: 31vh;
   position: absolute;
   z-index: 10
 }
