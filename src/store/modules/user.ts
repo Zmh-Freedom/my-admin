@@ -33,6 +33,7 @@ export default defineStore({
         apiLogin({ username: username.trim(), password: password }).then(response => {
           const { data } = response;
           this.token = data.token;
+          console.log(this.token);
           setToken(data.token);
           resolve();
         }).catch(error => {

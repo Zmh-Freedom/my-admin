@@ -22,7 +22,7 @@
 
 <script>
 import { defineComponent } from 'vue';
-import { transactionList } from '@/api/remote-search';
+// import { transactionList } from '@/api/remote-search';
 import { toThousandFilter } from '@/utils/filters';
 
 export default defineComponent({
@@ -56,9 +56,9 @@ export default defineComponent({
       return this.statusFilter(row.status);
     },
     fetchData() {
-      transactionList().then(response => {
-        this.list = response.data.items.slice(0, 8);
-      });
+      // transactionList().then(response => {
+      //   this.list = response.data.items.slice(0, 8);
+      // });
     }
   }
 });
