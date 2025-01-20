@@ -24,7 +24,7 @@ export function marketShareService(sub_id) {
   });
 }
 
-export function competitive(sub_id) {
+export function competitiveService(sub_id) {
   return request({
     url: '/subsystem/competitive/list',
     method: 'get',

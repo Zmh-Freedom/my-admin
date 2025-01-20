@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Chart2 from '@/views/myView/components/chart2.vue';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import '@/assets/index.css';
+import MarketSize from '@/views/myView/components/marketSizeChart.vue';
 import MapChart from '@/views/myView/components/mapChart.vue';
 import PieChart1 from '@/views/myView/components/pieChart1.vue';
 import PieChart2 from '@/views/myView/components/pieChart2.vue';
@@ -10,6 +10,7 @@ import PieChart4 from '@/views/myView/components/pieChart4.vue';
 import BarChart1 from '@/views/myView/components/barChart1.vue';
 import BarChart2 from '@/views/myView/components/barChart2.vue';
 import BarChart3 from '@/views/myView/components/barChart3.vue';
+const belongSubsystem = 54;
 const radio1 = ref(1);
 const tableData = [
   {
@@ -72,7 +73,7 @@ onBeforeUnmount(() => {
               <h2>
                 行业市场规模
               </h2>
-              <Chart2 class="chart chart_1"></Chart2>
+              <MarketSize  :belongSubsystem="belongSubsystem" class="chart chart_1"></MarketSize>
             </div>
           </div>
           <div class="box mt-23">
