@@ -18,7 +18,7 @@ option = {
     itemHeight: 14,
     type: 'scroll'
   },
-  // backgroundColor: 'transparent',
+  backgroundColor: 'transparent',
   grid: {
     top: '15%',
     left: '3%',

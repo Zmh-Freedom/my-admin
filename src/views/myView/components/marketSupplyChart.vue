@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { marketSizeService } from '@/api/subsystem';
+import { marketSupplyService } from '@/api/subsystem';
 import * as echarts from 'echarts';
 import { onMounted } from 'vue';
+const params = defineProps(['belongSubsystem']);
 type EChartsOption = echarts.EChartsOption;
 var myChart;
 var option: EChartsOption;
@@ -17,9 +18,8 @@ option = {
   },
   backgroundColor: 'transparent',
   legend: {
-    data: ['产值', '增长率'],
-    orient: 'vertical',
-    bottom: 'bottom',
+    data: ['市场需要', '产能'],
+    left: 'center',
     itemWidth: 15,
     itemHeight: 10
   },
@@ -27,7 +27,7 @@ option = {
     top: '4%',
     left: '3%',
     right: '4%',
-    bottom: '14%',
+    bottom: '10%',
     containLabel: true
   },
   xAxis: [
@@ -42,38 +42,36 @@ option = {
         fontSize: '10px'
       }
     }
-
   ],
   yAxis: [
     {
       type: 'value',
-      name: '产值',
+      name: '市场需要',
       splitLine: {
         show: false // 不显示网格线
       },
       axisLabel: {
-        formatter: '{value}',
-        fontSize: '10px'
+        formatter: '{value}'
       },
       show: false
     },
     {
       type: 'value',
-      name: '增长率',
+      name: '产能',
       splitLine: {
         show: false // 不显示网格线
       },
       axisLabel: {
-        formatter: '{value}',
-        fontSize: '10px'
+        formatter: '{value}%'
       },
       show: false
     }
   ],
   series: [
     {
-      name: '产值',
+      name: '市场需要',
       type: 'bar',
+      yAxisIndex: 1,
       tooltip: {
         valueFormatter: function (value) {
           return value as number + ' ';
@@ -82,62 +80,65 @@ option = {
       data: []
     },
     {
-      name: '增长率',
-      type: 'line',
-      yAxisIndex: 1,
+      name: '产能',
+      type: 'bar',
       tooltip: {
         valueFormatter: function (value) {
-          return value as number + '%';
+          return value as number + ' ';
         }
       },
       data: []
     }
   ]
 };
-const params = defineProps(['belongSubsystem']);
 async function setData() {
-  var result = await marketSizeService(params.belongSubsystem);
+  // 异步获取数据
+  const result = await marketSupplyService(params.belongSubsystem);
   if (result['code'] === 0) {
     var items = result.data.item;
-    var sizes: string[] = [];
-    var years: string[] = [];
-    var increaseRates: number[] = [];
+    var dates: string[] = [];
+    var capacity: number[] = [];
+    var demand: number[] = [];
     for (var i in items) {
-      sizes.push(items[i].size);
-      years.push(items[i].year);
-      increaseRates.push(items[i].increaseRate * 100);
+      dates.push(items[i].date);
+      capacity.push(items[i].capacity);
+      demand.push(items[i].demand);
     }
-    console.log(increaseRates);
+    // 设置数据
     myChart.setOption({
       xAxis: {
-        data: years
+        data: dates
       },
       series: [
         {
-          'name': '产值',
-          data: sizes
+          name: '市场需要',
+          data: demand,
+          tooltip: {
+            valueFormatter: function (value) {
+              return value as number + ' ';
+            }
+          }
         },
         {
-          'name': '增长率',
-          data: increaseRates
+          name: '产能',
+          data: capacity
         }
       ]
     });
   }
 }
-
 onMounted(() => {
-  var chartDom = document.getElementById('myChart');
+  var chartDom = document.getElementById('barChart3');
   myChart = echarts.init(chartDom, 'dark');
-  setData();
   // 设置实例参数
-  option && myChart.setOption(option);
+  myChart.setOption(option);
+  setData();
 });
 </script>
 
 <template>
-  <div ref="myChart"
-       id="myChart">
+  <div ref="barChart3"
+       id="barChart3">
 
   </div>
 </template>

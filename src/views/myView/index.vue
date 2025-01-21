@@ -9,7 +9,7 @@ import PieChart3 from '@/views/myView/components/pieChart3.vue';
 import ShareChart from '@/views/myView/components/marketShareChart.vue';
 import echelonChart from '@/views/myView/components/marketEchelon.vue';
 import CompetitiveChart from '@/views/myView/components/competitiveChart.vue';
-import BarChart3 from '@/views/myView/components/barChart3.vue';
+import SupplyChart from '@/views/myView/components/marketSupplyChart.vue';
 const belongSubsystem = 54;
 const radio1 = ref('第一梯队');
 const tableData = [
@@ -177,7 +177,7 @@ watch(radio1, (value) => {
           <div class="box4 flex-col" style="text-align: left;">
             <h2>市场供给</h2>
             <div>
-              <bar-chart3 class="chart_2"></bar-chart3>
+              <SupplyChart :belongSubsystem="belongSubsystem" class="chart_2 chart"></SupplyChart>
             </div>
           </div>
         </div>
