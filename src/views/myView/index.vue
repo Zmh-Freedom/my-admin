@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
 import '@/assets/index.css';
 import MarketSize from '@/views/myView/components/marketSizeChart.vue';
 import MapChart from '@/views/myView/components/mapChart.vue';
 import PieChart1 from '@/views/myView/components/pieChart1.vue';
 import PieChart2 from '@/views/myView/components/pieChart2.vue';
 import PieChart3 from '@/views/myView/components/pieChart3.vue';
-import PieChart4 from '@/views/myView/components/pieChart4.vue';
-import BarChart1 from '@/views/myView/components/barChart1.vue';
-import BarChart2 from '@/views/myView/components/barChart2.vue';
+import ShareChart from '@/views/myView/components/marketShareChart.vue';
+import echelonChart from '@/views/myView/components/marketEchelon.vue';
+import CompetitiveChart from '@/views/myView/components/competitiveChart.vue';
 import BarChart3 from '@/views/myView/components/barChart3.vue';
 const belongSubsystem = 54;
-const radio1 = ref(1);
+const radio1 = ref('第一梯队');
 const tableData = [
   {
     date: '2024年6月9日',
@@ -55,6 +55,10 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', scalePage);
 });
 
+watch(radio1, (value) => {
+  console.log(value);
+});
+
 </script>
 
 <template>
@@ -84,12 +88,12 @@ onBeforeUnmount(() => {
              alt=""/>
             <div class="box_1">
               <div style="margin-top: 1vh">
-                <el-radio-group v-model="radio1" size="small" syle="width: 5vh;height: 9.2vh;">
-                  <el-radio-button label="第一梯队" value=1 />
-                  <el-radio-button label="第二梯队" value=2 />
-                  <el-radio-button label="第三梯队" value=3 />
+                <el-radio-group v-model="radio1" size="small" >
+                  <el-radio-button label="第一梯队" value="第一梯队" />
+                  <el-radio-button label="第二梯队" value="第二梯队" />
+                  <el-radio-button label="第三梯队" value="第三梯队" />
                 </el-radio-group>
-                <bar-chart1 class="chart_1"></bar-chart1>
+                <echelonChart :echelon="radio1" :belongSubsystem="belongSubsystem"  class="chart_1"></echelonChart>
               </div>
             </div>
           </div>
@@ -147,7 +151,7 @@ onBeforeUnmount(() => {
             <div class="box_1 flex-col" style="text-align: left;">
               <h2>行业份额</h2>
               <div style="">
-                <pie-chart4 class="chart_pie2"></pie-chart4>
+                <ShareChart :belongSubsystem="belongSubsystem" class="chart_pie2"></ShareChart>
               </div>
             </div>
           </div>
@@ -159,7 +163,7 @@ onBeforeUnmount(() => {
             <div class="box_1" style="text-align: left;">
               <h3>竞品对标</h3>
               <div style="">
-                <bar-chart2 class="chart_1" style="font-size: 0.5%"></bar-chart2>
+                <CompetitiveChart :belongSubsystem="belongSubsystem" class="chart_1" style="font-size: 0.5%"></CompetitiveChart>
               </div>
             </div>
           </div>
