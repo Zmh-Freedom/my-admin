@@ -69,7 +69,7 @@ export default defineConfig(({ command, mode }) => {
       port: 8001,
       proxy: {
         '/api-test': {
-          target: 'https://api.midfar.com/dspt_test/api',
+          target: 'http://localhost:8080',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api-test/, ''),
           headers: {
